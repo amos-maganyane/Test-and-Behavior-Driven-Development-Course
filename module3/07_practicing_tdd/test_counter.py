@@ -38,7 +38,7 @@ class CounterTest(TestCase):
         self.assertEqual(result.status_code, status.HTTP_200_OK)
         data = result.get_json()
         self.assertEqual(data["baz"], baseline + 1)   
-        
+
 
     def test_read_a_counter(self):
         """It should read the counter"""
@@ -49,3 +49,12 @@ class CounterTest(TestCase):
         self.assertEqual(result.status_code, status.HTTP_200_OK)
         data = result.get_json()
         self.assertEqual(data["bin"], 0)
+
+
+    def test_delete_a_counter(self):
+        """It should delete the counter"""
+        result = self.client.post("/counters/fob")
+        self.assertEqual(result.status_code, status.HTTP_201_CREATED)
+        # Delete the counter
+        result = self.client.delete("/counters/fob")
+        self.assertEqual(result.status_code, status.HTTP_204_NO_CONTENT)
