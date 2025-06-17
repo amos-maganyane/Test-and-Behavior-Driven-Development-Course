@@ -92,3 +92,9 @@ class TestAccountModel(TestCase):
         found = Account.find(account.id)
         self.assertEqual(found.name, "Foo")           
 
+    def test_invalid_id_on_update(self):
+        """ Test invalid ID update """
+        data = ACCOUNT_DATA[self.rand] # get a random account
+        account = Account(**data)
+        account.id = None
+        self.assertRaises(DataValidationError, account.update)
