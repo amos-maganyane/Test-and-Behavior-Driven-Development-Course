@@ -97,9 +97,8 @@ class TestAccountModel(TestCase):
         self.assertRaises(DataValidationError, account.update)
 
     def test_delete_an_account(self):
-        """ Test Account delete using known data """
-        data = ACCOUNT_DATA[self.rand] # get a random account
-        account = Account(**data)
+        """ Test Account update using known data """
+        account = AccountFactory()
         account.create()
         self.assertEqual(len(Account.all()), 1)
         account.delete()
