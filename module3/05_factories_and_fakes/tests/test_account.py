@@ -79,10 +79,10 @@ class TestAccountModel(TestCase):
         self.assertEqual(account.phone_number, data["phone_number"])
         self.assertEqual(account.disabled, data["disabled"])
 
+
     def test_update_an_account(self):
         """ Test Account update using known data """
-        data = ACCOUNT_DATA[self.rand] # get a random account
-        account = Account(**data)
+        account = AccountFactory()
         account.create()
         self.assertIsNotNone(account.id)
         account.name = "Rumpelstiltskin"
