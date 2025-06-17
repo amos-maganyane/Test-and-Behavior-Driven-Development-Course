@@ -48,5 +48,13 @@ class TestAccountModel(TestCase):
         self.assertEqual(len(Account.all()), 1)
 
 
+    def test_create_all_accounts(self):
+        "Test create multiple accounts" 
+        for data in ACCOUNT_DATA:
+            account = Account(**data)
+            account.create()
+        self.assertEqual(len(Account.all()), len(ACCOUNT_DATA))   
+
+
 
 
