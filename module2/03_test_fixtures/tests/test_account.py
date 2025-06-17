@@ -5,6 +5,7 @@ import json
 from unittest import TestCase
 from models import db
 from models.account import Account
+import random
 
 ACCOUNT_DATA = {}
 
@@ -28,11 +29,24 @@ class TestAccountModel(TestCase):
 
     def setUp(self):
         """Truncate the tables"""
+        db.session.query(Account).delete()
+        db.session.commit()
 
     def tearDown(self):
         """Remove the session"""
+        db.session.remove()
 
     ######################################################################
     #  T E S T   C A S E S
     ######################################################################
+
+    def test_create_an_account(self):
+        "Test create a single account"
+        data = ACCOUNT_DATA[random.randint(0, len(ACCOUNT_DATA)-1)]
+        account =  Account(**data)
+        account.create()
+        self.assertEqual(len(Account.all()), 1)
+
+
+
 
